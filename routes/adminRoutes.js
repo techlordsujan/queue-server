@@ -75,7 +75,7 @@ router.put("/queue/:id/complete", authMiddleware, async (req, res) => {
         await sendSMS(
           nextCustomer.phone.startsWith("+1")
             ? nextCustomer.phone
-            : `+1{nextCustomer.phone}`,
+            : "+1" + nextCustomer.phone,
           "Please proceed for biometric processing."
         );
       }
