@@ -4,7 +4,6 @@ require("dotenv").config();
 // Replace these values with your Twilio credentials
 const accountSid = process.env.TWILIO_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
-const fromNumber = process.env.TWILIO_FROM;
 
 // Create a Twilio client
 const client = twilio(accountSid, authToken);
@@ -16,7 +15,7 @@ const client = twilio(accountSid, authToken);
  * @param {string} body - The message body
  * @returns {Promise<object>} - The result of the message sending attempt
  */
-async function sendSMS(to, body) {
+async function sendSMS(to, fromNumber, body) {
   try {
     const message = await client.messages.create({
       to,

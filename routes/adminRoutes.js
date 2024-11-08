@@ -48,7 +48,6 @@ router.get("/dashboard", authMiddleware, async (req, res) => {
 router.put("/queue/:id/complete", authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
     const customer = await Customer.findOne({ _id: id, status: "queued" });
 
     await Customer.findByIdAndUpdate(id, { status: "completed" });
@@ -77,6 +76,7 @@ router.put("/queue/:id/complete", authMiddleware, async (req, res) => {
           nextCustomer.phone.startsWith("+1")
             ? nextCustomer.phone
             : "+1" + nextCustomer.phone,
+          process.env.TWILIO_FROM,
           "Please proceed for biometric processing."
         );
       }
