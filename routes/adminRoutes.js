@@ -68,10 +68,11 @@ router.put("/queue/:id/complete", authMiddleware, async (req, res) => {
     if (nextCustomer) {
       await sendEmail(
         nextCustomer.email,
-        "It’s Your Turn",
+        "Biometric turn",
         "Please proceed for biometric processing."
       );
-      if (process.env.SEND_SMS) {
+      console.log(nextCustomer.phone, process.env.SEND_SMS);
+      if (process.env.SEND_SMS == 1) {
         await sendSMS(
           nextCustomer.phone.startsWith("+1")
             ? nextCustomer.phone
