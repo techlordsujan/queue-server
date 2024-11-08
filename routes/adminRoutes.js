@@ -60,7 +60,7 @@ router.put("/queue/:id/complete", authMiddleware, async (req, res) => {
 
     const nextCustomer = await Customer.findOne({
       status: "queued",
-      _id: id,
+      queueNumber: customer.queueNumber + 5,
     }).sort({
       queueNumber: 1,
     });
