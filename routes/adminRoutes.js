@@ -7,6 +7,7 @@ const authMiddleware = require("../middleware/auth");
 const router = express.Router();
 const dotenv = require("dotenv");
 const { sendEmail } = require("../utils/emailService");
+const sendSMS = require("../utils/smsService");
 dotenv.config(); // Load environment variables
 
 // Admin login route
@@ -70,6 +71,14 @@ router.put("/queue/:id/complete", authMiddleware, async (req, res) => {
         "It’s Your Turn",
         "Please proceed for biometric processing."
       );
+      if (process.env.SEND_SMS) {
+        await sendSMS(
+          nextCustomer.phone.startsWith("+1")
+            ? nextCustomer.phone
+            : `+1{nextCustomer.phone}`,
+          "Please proceed for biometric processing."
+        );
+      }
     }
     res.json({ message: "Customer marked as completed" });
   } catch (error) {
