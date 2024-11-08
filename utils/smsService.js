@@ -19,7 +19,7 @@ async function sendSMS(to, fromNumber, body) {
   try {
     const message = await client.messages.create({
       to,
-      fromNumber,
+      from: fromNumber,
       body,
     });
     console.log("Message sent:", message.sid);
