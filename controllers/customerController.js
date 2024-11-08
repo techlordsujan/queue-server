@@ -5,7 +5,7 @@ require("dotenv").config();
 // Controller for registering a new customer
 async function registerCustomer(req, res) {
   try {
-    const { firstName, lastName, email } = req.body;
+    const { firstName, lastName, email, phone } = req.body;
 
     const lastCustomer = await Customer.findOne().sort({ queueNumber: -1 });
     const queueNumber = lastCustomer ? lastCustomer.queueNumber + 1 : 1;
@@ -14,6 +14,7 @@ async function registerCustomer(req, res) {
       firstName,
       lastName,
       email,
+      phone,
       queueNumber,
     });
     await newCustomer.save();
