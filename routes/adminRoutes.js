@@ -58,15 +58,18 @@ router.put("/queue/:id/complete", authMiddleware, async (req, res) => {
     //   "Your biometric application is completed. You will be informed when the passport is ready."
     // );
 
-    const nextCustomer = await Customer.findOne({ status: "queued" }).sort({
+    const nextCustomer = await Customer.findOne({
+      status: "queued",
+      _id: id,
+    }).sort({
       queueNumber: 1,
     });
     if (nextCustomer) {
-      //   await sendEmail(
-      //     nextCustomer.email,
-      //     "It’s Your Turn",
-      //     "Please proceed for biometric processing."
-      //   );
+      await sendEmail(
+        nextCustomer.email,
+        "It’s Your Turn",
+        "Please proceed for biometric processing."
+      );
     }
     res.json({ message: "Customer marked as completed" });
   } catch (error) {
