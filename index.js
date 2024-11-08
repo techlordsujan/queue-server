@@ -9,7 +9,16 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
-app.use(cors());
+
+// Configure CORS options
+const corsOptions = {
+  origin: [process.env.CORS_URL, "http://localhost:3000"], // Replace this with your frontend domain
+  methods: "GET,POST,PUT,DELETE", // Specify allowed HTTP methods
+  allowedHeaders: "Content-Type,Authorization", // Specify allowed headers
+  credentials: true, // Include credentials if needed
+};
+
+app.use(cors(corsOptions));
 
 connectDB();
 
