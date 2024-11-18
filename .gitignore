@@ -25,6 +25,7 @@ Thumbs.db
 
 # Environment variables
 .env
+Dockerfile
 
 # Temporary files and directories
 tmp/

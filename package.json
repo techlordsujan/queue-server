@@ -18,7 +18,17 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.7.3",
     "nodemailer": "^6.9.15",
+    "serverless-http": "^3.2.0",
     "twilio": "^5.3.5",
     "xlsx": "^0.18.5"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/techlordsujan/queue-server.git"
+  },
+  "keywords": ["queue", "server", "Node.js", "API", "AWS"],
+  "bugs": {
+    "url": "https://github.com/techlordsujan/queue-server/issues"
+  },
+  "homepage": "https://github.com/techlordsujan/queue-server#readme"
 }
